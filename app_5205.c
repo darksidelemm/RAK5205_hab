@@ -560,7 +560,8 @@ void rui_uart_recv(RUI_UART_DEF uart_def, uint8_t *pdata, uint16_t len)
             {
                 NmeaString[NmeaStringSize++] = '\0';
 
-                RUI_LOG_PRINTF("NMEA: %s", NmeaString);
+                // Debugging... probably better to tap off the uBlox TXD line than do this.
+                //RUI_LOG_PRINTF("NMEA: %s", NmeaString);
                 GpsParseGpsData( ( int8_t* )NmeaString, NmeaStringSize );
             }
             /*****************************user code end***************************/
