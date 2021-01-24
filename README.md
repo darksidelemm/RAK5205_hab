@@ -6,7 +6,7 @@ This fork configures the uBlox 7 GPS on the RAK5205 into Airborne 1G mode on GPS
 
 Note that I do not recommend RAK Wireless products. With their recent firmware versions you have to use a horrible online compiler system, which makes development extremely painful. This repository only exists to configure what I did manage to get working.
 
-**WARNING: This firmware has NOT been flight tested! Do not rely on it for tracking your flight (Not that you should be relying on anything LoRaWAN / TTN based for reliable tracking anyway...)**
+**WARNING: This firmware has NOT been flight tested! (But has been checked with gps-sdr-sim) Do not rely on it for tracking your flight (Not that you should be relying on anything LoRaWAN / TTN based for reliable tracking anyway...)**
 
 ### Contacts
 * Mark Jessop - vk5qi at rfhead.net
