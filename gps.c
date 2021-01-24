@@ -188,7 +188,9 @@ void GpsConvertPositionFromStringToNumerical( void )
 }
 void GpsConvertAltitudeFromStringToNumerical( void )
 {
+    //RUI_LOG_PRINTF("Altitude Before Parsing: %s\r\n",NmeaGpsData.NmeaAltitude);
     Altitude = atoi( NmeaGpsData.NmeaAltitude ); 
+    //RUI_LOG_PRINTF("Altitude After Parsing: %d\r\n",Altitude);
 }
 
 uint8_t GpsGetLatestGpsPositionDouble( double *lati, double *longi )
@@ -350,7 +352,7 @@ uint8_t GpsParseGpsData( int8_t *rxBuffer, int32_t rxBufferSize )
     // Parse the GPGGA data 
     if( strncmp( ( const char* )NmeaGpsData.NmeaDataType, ( const char* )NmeaDataTypeGPGGA, 5 ) == 0 )
     {
-        // RUI_LOG_PRINTF("%s\r\n",rxBuffer); 
+        //RUI_LOG_PRINTF("%s\r\n",rxBuffer); 
         uint8_t BCC=0,temp=rxBuffer[1];
         char* p_temp1;
         uint8_t f_zz[3]={0};
@@ -443,6 +445,7 @@ uint8_t GpsParseGpsData( int8_t *rxBuffer, int32_t rxBufferSize )
         {
             NmeaGpsData.NmeaFixQuality[j] = rxBuffer[i];
         }
+        NmeaGpsData.NmeaFixQuality[2] = '\0';
         // NmeaSatelliteTracked
         fieldSize = 0;
         while( rxBuffer[i + fieldSize++] != ',' )
@@ -479,14 +482,19 @@ uint8_t GpsParseGpsData( int8_t *rxBuffer, int32_t rxBufferSize )
             }
         }
         memset(&(NmeaGpsData.NmeaAltitude),0,8);
+        uint8_t gotalt = 0;
         for( int8_t z=0, j = 0; j < fieldSize; j++,z++, i++ )
         {            
             if(rxBuffer[i] == '.')
             {
-                z--;
+                NmeaGpsData.NmeaAltitude[z] = '0';
+                gotalt = 1;
                 continue;
+            } else {
+                if (gotalt == 0){
+                    NmeaGpsData.NmeaAltitude[z] = rxBuffer[i];
+                }
             }
-            NmeaGpsData.NmeaAltitude[z] = rxBuffer[i];
         }
         // NmeaAltitudeUnit
         fieldSize = 0;
@@ -661,13 +669,17 @@ uint8_t GpsParseGpsData( int8_t *rxBuffer, int32_t rxBufferSize )
 
 void GpsFormatGpsData( void )
 {
+    //RUI_LOG_PRINTF("Type: %s\r\n", NmeaGpsData.NmeaDataType);
     if( strncmp( ( const char* )NmeaGpsData.NmeaDataType, ( const char* )NmeaDataTypeGPGGA, 5 ) == 0 )
     {
+        //RUI_LOG_PRINTF("Fix Qual: %s\r\n", NmeaGpsData.NmeaFixQuality);
         HasFix = ( NmeaGpsData.NmeaFixQuality[0] > 0x30 ) ? true : false;
     }
     else if ( strncmp( ( const char* )NmeaGpsData.NmeaDataType, ( const char* )NmeaDataTypeGPRMC, 5 ) == 0 )
     {
-        HasFix = ( NmeaGpsData.NmeaDataStatus[0] == 0x41 ) ? true : false;
+        // HasFix = ( NmeaGpsData.NmeaDataStatus[0] == 0x41 ) ? true : false;
+        // Only use GPGGA strings.
+        HasFix = false;
     }   
     GpsConvertPositionFromStringToNumerical( );
     GpsConvertPositionIntoBinary( );

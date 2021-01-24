@@ -78,7 +78,7 @@ void median(GPS_DATA_T* data_t)
 	}
 }
 
-int GPS_get_data(double* latitude,double* longitude,int16_t* altitude)
+int GPS_get_data(double* latitude,double* longitude,int32_t* altitude)
 {
 
 	uint8_t gpio_status;

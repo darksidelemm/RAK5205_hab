@@ -24,7 +24,7 @@ typedef struct
 	float triaxial_z;
 	double latitude;
     double longitude;
-    int16_t altitude;
+    int32_t altitude;
 }bsp_sensor_data_t;
 
 typedef struct 
@@ -37,7 +37,7 @@ typedef struct
 
 uint32_t BoardBatteryMeasureVolage( float *voltage );
 int BME680_get_data(uint32_t *humidity,int16_t* temp,uint32_t* pressure,uint32_t * resis);
-int GPS_get_data(double* latitude,double* longitude,int16_t* altitude);
+int GPS_get_data(double* latitude,double* longitude,int32_t* altitude);
 int lis3dh_get_data(float* lis_X,float* lis_Y,float* lis_Z);
 
 #endif  //__BSP_H__

@@ -25,7 +25,7 @@ typedef struct
     char NmeaLatitudePole[2];
     char NmeaLongitude[11];
     char NmeaLongitudePole[2];
-    char NmeaFixQuality[2];
+    char NmeaFixQuality[3];
     char NmeaSatelliteTracked[3];
     char NmeaHorizontalDilution[6];
     char NmeaAltitude[8];
