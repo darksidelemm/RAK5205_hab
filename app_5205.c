@@ -316,20 +316,20 @@ void app_loop(void)
 
             if(BME680_get_data(&bsp_sensor.humidity,&bsp_sensor.temperature,&bsp_sensor.pressure,&bsp_sensor.resis)==0)
             {
-                lpp_data[lpp_cnt].startcnt = sensor_data_cnt;
-                a[sensor_data_cnt++]=0x07;
-                a[sensor_data_cnt++]=0x68;
-                a[sensor_data_cnt++]=( bsp_sensor.humidity / 500 ) & 0xFF;
-                lpp_data[lpp_cnt].size = sensor_data_cnt - lpp_data[lpp_cnt].startcnt;
-                lpp_cnt++;
+                // lpp_data[lpp_cnt].startcnt = sensor_data_cnt;
+                // a[sensor_data_cnt++]=0x07;
+                // a[sensor_data_cnt++]=0x68;
+                // a[sensor_data_cnt++]=( bsp_sensor.humidity / 500 ) & 0xFF;
+                // lpp_data[lpp_cnt].size = sensor_data_cnt - lpp_data[lpp_cnt].startcnt;
+                // lpp_cnt++;
 
-                lpp_data[lpp_cnt].startcnt = sensor_data_cnt;	
-                a[sensor_data_cnt++]=0x06;
-                a[sensor_data_cnt++]=0x73;
-                a[sensor_data_cnt++]=(( bsp_sensor.pressure / 10 ) >> 8 ) & 0xFF;
-                a[sensor_data_cnt++]=(bsp_sensor.pressure / 10 ) & 0xFF;
-                lpp_data[lpp_cnt].size = sensor_data_cnt - lpp_data[lpp_cnt].startcnt;
-                lpp_cnt++;
+                // lpp_data[lpp_cnt].startcnt = sensor_data_cnt;	
+                // a[sensor_data_cnt++]=0x06;
+                // a[sensor_data_cnt++]=0x73;
+                // a[sensor_data_cnt++]=(( bsp_sensor.pressure / 10 ) >> 8 ) & 0xFF;
+                // a[sensor_data_cnt++]=(bsp_sensor.pressure / 10 ) & 0xFF;
+                // lpp_data[lpp_cnt].size = sensor_data_cnt - lpp_data[lpp_cnt].startcnt;
+                // lpp_cnt++;
 			
                 lpp_data[lpp_cnt].startcnt = sensor_data_cnt;
                 a[sensor_data_cnt++]=0x02;
@@ -339,30 +339,30 @@ void app_loop(void)
                 lpp_data[lpp_cnt].size = sensor_data_cnt - lpp_data[lpp_cnt].startcnt;
                 lpp_cnt++;
 
-                lpp_data[lpp_cnt].startcnt = sensor_data_cnt;
-                a[sensor_data_cnt++] = 0x04;
-				a[sensor_data_cnt++] = 0x02; //analog output
-				a[sensor_data_cnt++] = (((int32_t)(bsp_sensor.resis / 10)) >> 8) & 0xFF;
-				a[sensor_data_cnt++] = ((int32_t)(bsp_sensor.resis / 10 )) & 0xFF;
-                lpp_data[lpp_cnt].size = sensor_data_cnt - lpp_data[lpp_cnt].startcnt;
-                lpp_cnt++;
+                // lpp_data[lpp_cnt].startcnt = sensor_data_cnt;
+                // a[sensor_data_cnt++] = 0x04;
+				// a[sensor_data_cnt++] = 0x02; //analog output
+				// a[sensor_data_cnt++] = (((int32_t)(bsp_sensor.resis / 10)) >> 8) & 0xFF;
+				// a[sensor_data_cnt++] = ((int32_t)(bsp_sensor.resis / 10 )) & 0xFF;
+                // lpp_data[lpp_cnt].size = sensor_data_cnt - lpp_data[lpp_cnt].startcnt;
+                // lpp_cnt++;
             }
 
-            if(lis3dh_get_data(&bsp_sensor.triaxial_x,&bsp_sensor.triaxial_y,&bsp_sensor.triaxial_z) == 0)
-            {
-                x=(int)(bsp_sensor.triaxial_x);y=(int)(bsp_sensor.triaxial_y);z=(int)(bsp_sensor.triaxial_z);
-                lpp_data[lpp_cnt].startcnt = sensor_data_cnt;
-                a[sensor_data_cnt++]=0x03;
-                a[sensor_data_cnt++]=0x71;
-                a[sensor_data_cnt++]=(x>>8) & 0xff;
-                a[sensor_data_cnt++]=x & 0xff;
-                a[sensor_data_cnt++]=(y>>8) & 0xff;
-                a[sensor_data_cnt++]=y & 0xff;
-                a[sensor_data_cnt++]=(z>>8) & 0xff;
-                a[sensor_data_cnt++]=z & 0xff;
-                lpp_data[lpp_cnt].size = sensor_data_cnt - lpp_data[lpp_cnt].startcnt;
-                lpp_cnt++;
-            }
+            // if(lis3dh_get_data(&bsp_sensor.triaxial_x,&bsp_sensor.triaxial_y,&bsp_sensor.triaxial_z) == 0)
+            // {
+            //     x=(int)(bsp_sensor.triaxial_x);y=(int)(bsp_sensor.triaxial_y);z=(int)(bsp_sensor.triaxial_z);
+            //     lpp_data[lpp_cnt].startcnt = sensor_data_cnt;
+            //     a[sensor_data_cnt++]=0x03;
+            //     a[sensor_data_cnt++]=0x71;
+            //     a[sensor_data_cnt++]=(x>>8) & 0xff;
+            //     a[sensor_data_cnt++]=x & 0xff;
+            //     a[sensor_data_cnt++]=(y>>8) & 0xff;
+            //     a[sensor_data_cnt++]=y & 0xff;
+            //     a[sensor_data_cnt++]=(z>>8) & 0xff;
+            //     a[sensor_data_cnt++]=z & 0xff;
+            //     lpp_data[lpp_cnt].size = sensor_data_cnt - lpp_data[lpp_cnt].startcnt;
+            //     lpp_cnt++;
+            // }
 
 	        if(sensor_data_cnt != 0)
             { 
