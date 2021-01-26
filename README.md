@@ -31,4 +31,6 @@ Yes, this build process sucks. RAK Wireless have really made a bad decision with
 * I found I had to re-plug the board for flashing to work reliably. Sometimes it will just crash out halfway through an upload. Try, try again.
 
 ## Configuration
-From here it should be possible to configure the board to talk to The Things Network via AT commands as per the RAK5205 quick-start guide: https://docs.rakwireless.com/Product-Categories/WisTrio/RAK7205-5205/Quickstart/
+* From here it should be possible to configure the board to talk to The Things Network via AT commands as per the RAK5205 quick-start guide: https://docs.rakwireless.com/Product-Categories/WisTrio/RAK7205-5205/Quickstart/
+* Notes on using TTN HAB Bridge are available here: https://revspace.nl/TTNHABBridge
+* With the current packet size, the on-air time is aboug 52ms, which means packets can be sent every 150 seconds and still not breach the 30-seconds-per-day on-air time fair-usage limits.
